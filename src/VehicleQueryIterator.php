@@ -3,7 +3,7 @@
 namespace Indielab\AutoScout24;
 
 use Countable;
-use ReturnTypeWillChange;
+use Indielab\AutoScout24\Vehicle;
 
 class VehicleQueryIterator implements \Iterator, Countable
 {
@@ -22,11 +22,19 @@ class VehicleQueryIterator implements \Iterator, Countable
 
     public int $currentPageResultCount;
 
+    /**
+     * @return int The count of items in the collection
+     */
+    #[\ReturnTypeWillChange]
     public function count(): int
     {
         return count($this->_data);
     }
 
+    /**
+     * Rewind the Iterator to the first element
+     */
+    #[\ReturnTypeWillChange]
     public function rewind(): void
     {
         reset($this->_data);
@@ -35,21 +43,36 @@ class VehicleQueryIterator implements \Iterator, Countable
     /**
      * @return Vehicle Returns the Vehicle Object.
      */
+    #[\ReturnTypeWillChange]
     public function current(): Vehicle
     {
         return new Vehicle(current($this->_data));
     }
 
-    #[ReturnTypeWillChange] public function key() // Todo: Signature needs to be adjusted from php 8.1 onwards
+    /**
+     * @return mixed The current position key
+     */
+    #[\ReturnTypeWillChange]
+    public function key()
     {
         return key($this->_data);
     }
 
+    /**
+     * Move forward to next element
+     */
+    #[\ReturnTypeWillChange]
     public function next(): void
     {
         next($this->_data);
     }
 
+    /**
+     * Checks if current position is valid
+     * 
+     * @return bool Whether the current position is valid
+     */
+    #[\ReturnTypeWillChange]
     public function valid(): bool
     {
         return key($this->_data) !== null;

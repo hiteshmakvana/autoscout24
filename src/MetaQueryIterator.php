@@ -68,6 +68,7 @@ class MetaQueryIterator implements \Iterator
         $this->_data = $data;
     }
 
+    #[\ReturnTypeWillChange]
     public function rewind(): void
     {
         reset($this->_data);
@@ -76,21 +77,28 @@ class MetaQueryIterator implements \Iterator
     /**
      * @return Meta Returns the Vehicle Object.
      */
+    #[\ReturnTypeWillChange]
     public function current(): Meta
     {
         return new Meta(current($this->_data));
     }
 
+    /**
+     * @return mixed The current position key
+     */
+    #[\ReturnTypeWillChange]
     public function key()
     {
         return key($this->_data);
     }
 
+    #[\ReturnTypeWillChange]
     public function next(): void
     {
         next($this->_data);
     }
 
+    #[\ReturnTypeWillChange]
     public function valid(): bool
     {
         return key($this->_data) !== null;
